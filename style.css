@@ -397,4 +397,7 @@ header {
     .contact .wrapper {
         padding: 10px;
     }
+    .body{
+        background-attachment:fixed;
+    }
 }
