@@ -372,3 +372,29 @@ header {
     margin: 7px;
     text-align: center;
 }
+@media (max-width: 480px) {
+    header {
+        padding: 14px 5%;
+    }
+    .home-about {
+        top: 55%;
+        left: 5%;
+        font-size: 20px;
+        padding: 0.5rem;
+    }
+    .about-text, .services-text {
+        padding: 0.5rem;
+    }
+    .main-about, .main-services {
+        flex-direction: column;
+    }
+    .photo-gallery {
+        flex-direction: column;
+    }
+    .photo img {
+        margin-bottom: 10px;
+    }
+    .contact .wrapper {
+        padding: 10px;
+    }
+}
