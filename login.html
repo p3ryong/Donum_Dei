@@ -1,0 +1,88 @@
+<?php
+include 'connect.php';
+$conn = new mysqli($host, $db_username, $db_password, $db_name);
+if ($conn == false) {
+    die("connection_error");
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $username = $_POST["uname"];
+    $password = $_POST["password"];
+
+    $sql = "SELECT * FROM `crud` WHERE uname = '$username' AND password = '$password'";
+    $result = mysqli_query($conn, $sql);
+    $row = mysqli_fetch_array($result);
+
+    if ($row) {
+        if ($row["usertype"] == "user") {
+            header("Location: userlogin.php");
+            exit();
+        } elseif ($row["usertype"] == "admin") {
+            header("Location: index.php");
+            exit();
+        }
+    } else {
+        echo "Username or password incorrect";
+    }
+}
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="stylelogin.css">
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@2.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/boxicons@latest/css/boxicons.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@600&display=swap" rel="stylesheet">
+    <title>Donum Dei | Login</title>
+</head>
+<body>
+    
+    <header>
+        <a href="#" class="logo"><i class="ri-home-line"></i><span>Donum Dei</span></a>
+    </header>
+
+    <div class="box">
+        <div class="container">
+            <div class="top-header">
+                <span><a href="register.html">Don't have an Account?</a></span>
+                <header>Login</header>
+            </div>
+
+            <form action="" method="post">
+
+            <div class="input-box">
+                <input type="text" class="input" placeholder="Username" name="uname" required>
+                <i class="bx bx-user"></i>
+            </div>
+
+            <div class="input-box">
+                <input type="password" class="input" placeholder="Password" name="password" required>
+                <i class="bx bx-lock-alt"></i>
+            </div>
+
+            <div class="input-box">
+                 <button type="submit" name="submit" class="submit">Login</button>
+            </div>
+
+            </form>
+
+            <div class="bottom">
+                <div class="left">
+                    <input type="checkbox" id="check">
+                    <label for="check">Remember Me</label>
+                </div>
+
+                <div class="right">
+                    <label><a href="#">Forgot Password?</a></label>
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</body>
+</html>
